@@ -1,0 +1,79 @@
+body {
+  background-color: #f1f6f7;
+  font-family: "Nunito", sans-serif;
+  /*"gt_walsheim_regular", "Helvetica Neue", Helvetica sans-serif*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #444444;
+}
+
+ul {
+  margin: 0;
+}
+
+nav .navbar-brand {
+  color: #ffffff !important;
+  font-size: 30px;
+}
+
+.bg-light {
+  background-color: #fea735 !important;
+}
+
+nav button:focus {
+  outline: transparent;
+}
+
+.text-center {
+  align-content: center;
+  width: 50%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #f1f6f7;
+  padding: 10px;
+}
+
+.content-section {
+  margin: 0 auto;
+  width: 50%;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.content-section-list {
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.item {
+  padding: 3px;
+}
+
+.form-inline {
+  margin: auto 0;
+  float: right;
+}
+
+.pagination {
+  width: 30%;
+  margin: 0 auto;
+}

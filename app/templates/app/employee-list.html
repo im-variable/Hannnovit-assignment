@@ -1,0 +1,99 @@
+{% extends 'app/base.html' %} {% block content %}
+
+<div class='fluid-container'>
+
+    <div class='row w-100 pb-3'>
+        <div class='col-6 float-right' >
+            <a href={% url 'employee' %} class='float-left'><button class='btn btn-info'>Add Employee</button></a>
+        </div>
+        <div class='col-6'>
+        <form  class='form-inline float-right' action={% url 'employee-search' %} method='POST'>
+        {% csrf_token %}
+            <select class='form-control' name='criteria'>
+            <option value='name'>Name</option>
+            <option value='pan_number'>Pan Number</option>
+            <option value='age'>Age</option>
+            <option value='gender'>Gender</option>
+            <option value='email'>Email</option>
+            <option value='city'>City</option>
+            </select>
+            <input type='text' placeholder='search' name='search' class='form-control' required/>
+            <button type='submit' class='btn btn-success'>Search</button>
+        </form>
+        </div>
+    </div>
+
+    <div class="grid-container fluid-container content-section-list">
+    <div class="item font-weight-bold">Name</div>
+    <div class="item font-weight-bold">Pan Number</div>
+    <div class="item font-weight-bold">Age</div>
+    <div class="item font-weight-bold">Gender</div>
+    <div class="item font-weight-bold">Email</div>
+    <div class="item font-weight-bold">City</div>
+    <div class="item font-weight-bold">Action</div>
+
+    {% for employee in page_obj %}
+    <div class="item">{{employee.name}}</div>
+    <div class="item">{{employee.pan_number}}</div>
+    <div class="item">{{employee.age}}</div>
+    <div class="item">{{employee.gender}}</div>
+    <div class="item">{{employee.email}}</div>
+    <div class="item">{{employee.city}}</div>
+    <div class="item">
+        <div class="btn-group">
+        <a href={% url 'employee-update' employee.id %}><button class="btn btn-sm btn-warning">UPDATE</button></a>
+        <a href={% url 'employee-delete' employee.id %}><button class="btn btn-sm btn-danger">DELETE</button></a>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+    {% comment %} <div class="text-center">
+    {% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a class='btn btn-outline-info mb-4' href="?page=1">First</a>
+        <a class='btn btn-outline-info mb-4' href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a class='btn btn-info mb-4' href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class='btn btn-outline-info mb-4' href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a class='btn btn-outline-info mb-4' href="?page={{}page_obj.next_page_number}">Next</a>
+        <a class='btn btn-outline-info mb-4' href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+    {% endif %}
+    </div> {% endcomment %}
+
+    {% if is_paginated %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a class='btn btn-outline-info mb-4' href="?page=1">First</a>
+        <a class='btn btn-outline-info mb-4' href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a class='btn btn-info mb-4' href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class='btn btn-outline-info mb-4' href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a class='btn btn-outline-info mb-4' href="?page={{}page_obj.next_page_number}">Next</a>
+        <a class='btn btn-outline-info mb-4' href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+    </span>
+</div>
+    {% endif %}
+
+</div>
+
+{% endblock content%}
